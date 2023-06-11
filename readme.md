@@ -11,6 +11,7 @@ https://raytracing.github.io/
 
 `open image.ppm`
 
-# Rainbow image
+# Sky rayer image
 
-![Screenshot 2023-06-06 at 9 29 31 PM](https://github.com/Tonipenyallop/raytracing/assets/81348589/a0b101c0-1f76-42c2-a8a3-db36610cc3b0)
+![Screenshot 2023-06-11 at 11 33 33 PM](https://github.com/Tonipenyallop/raytracing/assets/81348589/57b5cea4-61f1-4f7b-9096-4304cfe7721b)
+
