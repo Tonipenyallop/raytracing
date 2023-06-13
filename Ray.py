@@ -1,3 +1,4 @@
+import math
 from Vec3 import Vec3
 
 
@@ -7,8 +8,28 @@ class Ray:
         self.direction = direction
 
     def rayColor(self) -> Vec3:
+        t = self.hitSphere(Vec3(0.0, 0.0, -1.0), 0.5)
+        if t > 0.0:
+            N = self.at(t).substruct(Vec3(0.0, 0.0, -1.0))
+            return Vec3(N.x + 1.0, N.y + 1.0, N.z + 1.0).multiply(0.5)
+
         unitDirection = Vec3(
             self.direction.x, self.direction.y, self.direction.z)
-        # What the t stands for?
+
         t = 0.5 * (unitDirection.y + 1.0)
+
         return Vec3(1.0, 1.0, 1.0).multiply(1.0 - t).add(Vec3(0.5, 0.7, 1.0).multiply(t))
+
+    def hitSphere(self, center: Vec3, radious: float) -> float:
+        oc = self.origin.substruct(center)
+        a = self.direction.dot(self.direction)
+        b = 2.0 * oc.dot(self.direction)
+        c = oc.dot(oc) - radious ** 2
+        dicriminant = b ** 2 - 4 * a * c
+        if dicriminant < 0:
+            return -1.0
+        else:
+            return (-b - math.sqrt(dicriminant)) / (2.0 * a)
+
+    def at(self, t: float) -> Vec3:
+        return self.origin.add(self.direction.multiply(t))
