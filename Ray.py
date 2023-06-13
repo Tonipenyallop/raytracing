@@ -22,14 +22,14 @@ class Ray:
 
     def hitSphere(self, center: Vec3, radious: float) -> float:
         oc = self.origin.substruct(center)
-        a = self.direction.dot(self.direction)
-        b = 2.0 * oc.dot(self.direction)
-        c = oc.dot(oc) - radious ** 2
-        dicriminant = b ** 2 - 4 * a * c
+        a = self.direction.square()
+        halfB = oc.dot(self.direction)
+        c = oc.square() - radious ** 2
+        dicriminant = halfB ** 2 - a * c
         if dicriminant < 0:
             return -1.0
         else:
-            return (-b - math.sqrt(dicriminant)) / (2.0 * a)
+            return (-halfB - math.sqrt(dicriminant)) / a
 
     def at(self, t: float) -> Vec3:
         return self.origin.add(self.direction.multiply(t))
